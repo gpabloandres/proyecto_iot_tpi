@@ -1,0 +1,355 @@
+[
+    {
+        "id": "18f99e3a39e8316a",
+        "type": "tab",
+        "label": "Temperatura y Humedad (DHT11)",
+        "disabled": false,
+        "info": "Flujo para recibir y visualizar datos de temperatura y humedad del sensor DHT11 a través de MQTT."
+    },
+    {
+        "id": "e9365e69e06f23c9",
+        "type": "mqtt in",
+        "z": "18f99e3a39e8316a",
+        "name": "MQTT Entrada Temperatura",
+            "topic": "comedor/dht11/temperatura",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7472c28e84850c59",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "62c0b02f83863afb"
+            ]
+        ]
+    },
+    {
+        "id": "62c0b02f83863afb",
+        "type": "function",
+        "z": "18f99e3a39e8316a",
+        "name": "Convertir a número (Temp)",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "2b63577d48d0e768",
+                "8c9197c36d0a7a35",
+                "b7f0b6a8d8e3c101"
+            ]
+        ]
+    },
+    {
+        "id": "2b63577d48d0e768",
+        "type": "ui_gauge",
+        "z": "18f99e3a39e8316a",
+        "name": "Medidor de Temperatura",
+        "group": "e14b149b1ff30b6e",
+        "order": 0,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Temperatura (°C)",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "50",
+        "colors": [
+            "#0099cc",
+            "#ff9900",
+            "#ff3300"
+        ],
+        "seg1": "20",
+        "seg2": "30",
+        "diff": false,
+        "className": "",
+        "x": 640,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c62061e88849646b",
+        "type": "mqtt in",
+        "z": "18f99e3a39e8316a",
+        "name": "MQTT Entrada Humedad",
+            "topic": "comedor/dht11/humedad",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "7472c28e84850c59",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "0f496109e25b15b0"
+            ]
+        ]
+    },
+    {
+        "id": "0f496109e25b15b0",
+        "type": "function",
+        "z": "18f99e3a39e8316a",
+        "name": "Convertir a número (Humedad)",
+        "func": "msg.payload = parseFloat(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "63e800d922a938c5",
+                "93892795f6610086",
+                "b7f0b6a8d8e3c101"
+            ]
+        ]
+    },
+    {
+        "id": "63e800d922a938c5",
+        "type": "ui_gauge",
+        "z": "18f99e3a39e8316a",
+        "name": "Medidor de Humedad",
+        "group": "e14b149b1ff30b6e",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Humedad (%)",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#0099cc",
+            "#ff9900",
+            "#ff3300"
+        ],
+        "seg1": "40",
+        "seg2": "70",
+        "diff": false,
+        "className": "",
+        "x": 640,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8c9197c36d0a7a35",
+        "type": "ui_chart",
+        "z": "18f99e3a39e8316a",
+        "name": "Gráfico de Temperatura",
+        "group": "e14b149b1ff30b6e",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "label": "Histórico de Temperatura",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Esperando datos...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "93892795f6610086",
+        "type": "ui_chart",
+        "z": "18f99e3a39e8316a",
+        "name": "Gráfico de Humedad",
+        "group": "e14b149b1ff30b6e",
+        "order": 3,
+        "width": "6",
+        "height": "4",
+        "label": "Histórico de Humedad",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Esperando datos...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b7f0b6a8d8e3c101",
+        "type": "function",
+        "z": "18f99e3a39e8316a",
+        "name": "Evaluar y preparar datos",
+        "func": "const temperatura = Number(msg.payload);\nconst topic = msg.topic || '';\n\nif (!Number.isFinite(temperatura)) {\n    return null;\n}\n\nif (topic.endsWith('/temperatura')) {\n    flow.set('dht11_temperatura', temperatura);\n} else if (topic.endsWith('/humedad')) {\n    flow.set('dht11_humedad', temperatura);\n} else {\n    return null;\n}\n\nconst temp = flow.get('dht11_temperatura');\nconst hum = flow.get('dht11_humedad');\nif (!Number.isFinite(temp) || !Number.isFinite(hum)) {\n    return null;\n}\n\nconst timestamp = Math.floor(Date.now() / 1000);\nconst alertas = [];\nif (temp < 18 || temp > 30) {\n    alertas.push(`Temperatura fuera de rango: ${temp.toFixed(2)} °C`);\n}\nif (hum < 40 || hum > 80) {\n    alertas.push(`Humedad fuera de rango: ${hum.toFixed(2)} %`);\n}\n\nlet telegramMsg = null;\nconst telegramToken = env.get('TELEGRAM_BOT_TOKEN');\nconst telegramChatId = env.get('TELEGRAM_CHAT_ID');\nif (alertas.length > 0 && telegramToken && telegramChatId) {\n    telegramMsg = {\n        method: 'GET',\n        url: `https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${encodeURIComponent(telegramChatId)}&text=${encodeURIComponent(`Alerta DHT11 - ${alertas.join(' - ')} - Hora: ${new Date().toISOString()}`)}`,\n        headers: {}\n    };\n} else if (alertas.length > 0) {\n    node.warn('Faltan TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID; no se envio la alerta.');\n}\n\nlet influxMsg = null;\nconst influxUrl = env.get('INFLUXDB_URL');\nconst influxOrg = env.get('INFLUXDB_ORG');\nconst influxBucket = env.get('INFLUXDB_BUCKET');\nconst influxToken = env.get('INFLUXDB_TOKEN');\nif (influxUrl && influxOrg && influxBucket && influxToken) {\n    influxMsg = {\n        method: 'POST',\n        url: `${influxUrl.replace(/\\/$/, '')}/api/v2/write?org=${encodeURIComponent(influxOrg)}&bucket=${encodeURIComponent(influxBucket)}&precision=s`,\n        headers: {\n            Authorization: `Token ${influxToken}`,\n            'Content-Type': 'text/plain; charset=utf-8'\n        },\n        payload: `dht11,ubicacion=comedor temperatura=${temp},humedad=${hum} ${timestamp}`\n    };\n} else {\n    node.warn('Faltan INFLUXDB_URL, INFLUXDB_ORG, INFLUXDB_BUCKET o INFLUXDB_TOKEN; no se guardaron los datos.');\n}\n\nreturn [telegramMsg, influxMsg];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 350,
+        "wires": [
+            [
+                "c1e2f3a4b5c6d701"
+            ],
+            [
+                "d2e3f4a5b6c7d802"
+            ]
+        ]
+    },
+    {
+        "id": "c1e2f3a4b5c6d701",
+        "type": "http request",
+        "z": "18f99e3a39e8316a",
+        "name": "Enviar alerta por Telegram",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 980,
+        "y": 330,
+        "wires": [
+            [
+                "e3f4a5b6c7d8e903"
+            ]
+        ]
+    },
+    {
+        "id": "d2e3f4a5b6c7d802",
+        "type": "http request",
+        "z": "18f99e3a39e8316a",
+        "name": "Guardar en InfluxDB local",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 980,
+        "y": 390,
+        "wires": [
+            [
+                "f4a5b6c7d8e9f004"
+            ]
+        ]
+    },
+    {
+        "id": "e3f4a5b6c7d8e903",
+        "type": "debug",
+        "z": "18f99e3a39e8316a",
+        "name": "Respuesta Telegram",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 330,
+        "wires": []
+    },
+    {
+        "id": "f4a5b6c7d8e9f004",
+        "type": "debug",
+        "z": "18f99e3a39e8316a",
+        "name": "Respuesta InfluxDB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 390,
+        "wires": []
+    },
+    {
+        "id": "7472c28e84850c59",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e14b149b1ff30b6e",
+        "type": "ui_group",
+        "name": "Temperatura y Humedad",
+        "tab": "e0735e081ffc8f47",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e0735e081ffc8f47",
+        "type": "ui_tab",
+        "name": "INICIO",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false,
+        "info": "Pestaña de inicio del sistema MARTECH"
+    }
+]
