@@ -43,9 +43,9 @@ try:
     while True:
         # Simula la lectura de un sensor DHT11
         # Temperatura en grados Celsius (ej. entre 18.0 y 30.0)
-        temperatura = round(random.uniform(18.0, 50.0), 2)
+        temperatura = round(random.uniform(18.0, 30.0), 2)
         # Humedad relativa en porcentaje (ej. entre 40% y 80%)
-        humedad = round(random.uniform(40.0, 100.0), 2)
+        humedad = round(random.uniform(40.0, 80.0), 2)
 
         # Publica los valores en sus respectivos tópicos
         temp_result = client.publish(MQTT_TOPIC_TEMP, str(temperatura), qos=1)
